@@ -112,6 +112,49 @@ Isso pode ser útil para verificar se cada componente está funcionando como esp
 *   **Teste em Conta Demonstração**: Antes de usar qualquer robô de trading com dinheiro real, teste-o exaustivamente em uma conta de demonstração (se disponível) ou com valores muito pequenos.
 *   **Sem Garantias**: O uso deste software é por sua conta e risco. Não há garantias de lucro, e perdas financeiras podem ocorrer.
 
+## Gerando um Executável (Opcional)
+
+Se você deseja criar uma versão executável do robô que possa ser executada em um computador com o mesmo sistema operacional sem a necessidade de instalar Python ou as dependências manualmente, você pode usar o PyInstaller. Os scripts de build fornecidos automatizam esse processo.
+
+**Passos para Gerar o Executável:**
+
+1.  **Ative o Ambiente Virtual e Instale Dependências:**
+    *   Certifique-se de que seu ambiente virtual (`venv`) está ativo.
+    *   Instale ou atualize todas as dependências, incluindo `pyinstaller`:
+        ```bash
+        pip install -r requirements.txt
+        ```
+
+2.  **Execute o Script de Build:**
+    *   Navegue até a pasta raiz do projeto no seu terminal.
+    *   **Para Windows:**
+        ```batch
+        .\build_executable.bat
+        ```
+    *   **Para Linux/macOS:**
+        *   Se for a primeira vez, torne o script executável: `chmod +x build_executable.sh`
+        *   Execute o script:
+            ```bash
+            ./build_executable.sh
+            ```
+    *   O script executará o PyInstaller. Este processo pode levar alguns minutos e exibirá muitas mensagens no console.
+
+3.  **Localize o Executável:**
+    *   Após a conclusão, uma nova pasta chamada `dist` será criada no diretório do projeto.
+    *   Dentro de `dist`, você encontrará uma subpasta chamada `TradingBotBTCBRL` (ou o nome definido no script de build).
+    *   O aplicativo executável (ex: `TradingBotBTCBRL.exe` no Windows, `TradingBotBTCBRL` no Linux/macOS) estará dentro desta subpasta, junto com outros arquivos necessários.
+
+4.  **Teste o Executável:**
+    *   Copie a subpasta inteira (ex: `dist/TradingBotBTCBRL`) para outro local, idealmente em uma máquina sem Python ou as dependências do projeto instaladas (mas com o mesmo sistema operacional).
+    *   Execute o arquivo diretamente dali para garantir que ele funciona como esperado. Verifique se o log (`bot_trades.log`) é criado corretamente no diretório do executável.
+
+**Considerações Importantes:**
+
+*   **Sistema Operacional:** O executável é específico para o sistema operacional em que foi criado (ex: um `.exe` do Windows não rodará no Linux/macOS).
+*   **Tamanho:** A pasta do executável pode ser grande, pois inclui o Python e as bibliotecas.
+*   **Dependências Complexas:** Se o executável não funcionar e apresentar erros de "módulo não encontrado" (especialmente para bibliotecas como `pandas` ou `ta`), pode ser necessário ajustar o comando do PyInstaller nos scripts `build_executable` (ex: adicionando `--hidden-import nome_do_modulo`).
+*   **Antivírus:** Ocasionalmente, programas antivírus podem sinalizar executáveis gerados pelo PyInstaller como suspeitos (falso positivo).
+
 ---
 
 Boa sorte e boas negociações (simuladas)!
